@@ -115,14 +115,13 @@ def communicate(options, daemon):
         logger.info('Using config from "%s" instead', path)
         global_config.load_config(path)
 
-    if USER != 'root':
-        # Might be triggered by udev, so skip the root user.
-        # This will also refresh the config of the daemon if the user changed
-        # it in the meantime.
-        # config_dir is either the cli arg or the default path in home
-        config_dir = os.path.dirname(global_config.path)
-        daemon.set_config_dir(config_dir)
-        migrate()
+    # Might be triggered by udev, so skip the root user.
+    # This will also refresh the config of the daemon if the user changed
+    # it in the meantime.
+    # config_dir is either the cli arg or the default path in home
+    config_dir = os.path.dirname(global_config.path)
+    daemon.set_config_dir(config_dir)
+    migrate()
 
     if options.command == AUTOLOAD:
         # if device was specified, autoload for that one. if None autoload

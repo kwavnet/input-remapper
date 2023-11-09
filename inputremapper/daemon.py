@@ -198,8 +198,7 @@ class Daemon:
 
         self.config_dir = None
 
-        if USER != "root":
-            self.set_config_dir(get_config_path())
+        self.set_config_dir(get_config_path())
 
         # check privileges
         if os.getuid() != 0:
@@ -259,10 +258,9 @@ class Daemon:
                 logger.error("Failed to connect to the service")
                 sys.exit(8)
 
-        if USER != "root":
-            config_path = get_config_path()
-            logger.debug('Telling service about "%s"', config_path)
-            interface.set_config_dir(get_config_path(), timeout=2)
+        config_path = get_config_path()
+        logger.debug('Telling service about "%s"', config_path)
+        interface.set_config_dir(get_config_path(), timeout=2)
 
         return interface
 
