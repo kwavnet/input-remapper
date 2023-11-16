@@ -31,7 +31,7 @@ from inputremapper.user import USER, HOME
 
 rel_path = ".config/input-remapper-2"
 
-CONFIG_PATH = os.path.join(HOME, rel_path)
+CONFIG_PATH = os.environ.get('INPUT_REMAPPER_CONFIG', os.path.join(HOME, rel_path))
 
 
 def chown(path):
